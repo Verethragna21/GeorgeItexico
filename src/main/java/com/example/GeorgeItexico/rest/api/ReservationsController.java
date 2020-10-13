@@ -3,7 +3,7 @@ package com.example.GeorgeItexico.rest.api;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 import com.example.GeorgeItexico.dao.IReservationRepository;
-import com.example.GeorgeItexico.entity.Reservations;
+import com.example.GeorgeItexico.entity.Reservation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/george")
+//@RequestMapping(path = "/george")
 @Tag(name = "Reservations")
 public class ReservationsController {
 
@@ -41,21 +41,21 @@ public class ReservationsController {
           responseCode = "200",
           description = "Successful Response",
           content = @Content(array = @ArraySchema(schema = @Schema(implementation =
-              Reservations.class)))
+              Reservation.class)))
       )
   )
   @GetMapping(
       path = "/reservations",
       produces = APPLICATION_JSON_VALUE
   )
-  public ResponseEntity<List<Reservations>> getReservation() {
-    List<Reservations> listofReservations = (List<Reservations>) reservationsRepository.findAll();
+  public ResponseEntity<List<Reservation>> getReservation() {
+    List<Reservation> listofReservations = (List<Reservation>) reservationsRepository.findAll();
     return new ResponseEntity(listofReservations, HttpStatus.OK);
   }
 
   /**
    * REST API that save a new reservation.
-   * @param reservations
+   * @param reservation
    * @return String
    */
   @Operation(
@@ -65,7 +65,7 @@ public class ReservationsController {
       @ApiResponse(
           responseCode = "200",
           description = "Successful Response",
-          content = @Content(schema = @Schema(implementation = Reservations.class))
+          content = @Content(schema = @Schema(implementation = Reservation.class))
       )
   )
   @PostMapping(
@@ -73,8 +73,8 @@ public class ReservationsController {
       consumes = APPLICATION_JSON_VALUE
   )
   public ResponseEntity<String> newReservation(
-      @RequestBody Reservations reservations) {
-    reservationsRepository.save(reservations);
+      @RequestBody Reservation reservation) {
+    reservationsRepository.save(reservation);
     return new ResponseEntity<>("Info saved correctly", HttpStatus.OK);
   }
 

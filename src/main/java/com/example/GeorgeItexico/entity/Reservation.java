@@ -1,6 +1,7 @@
 package com.example.GeorgeItexico.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,18 +12,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-public class Reservations {
+public class Reservation {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
+  private Integer id;
 
   private String name;
-  private LocalDate reservationDate;
+  private LocalDateTime time;
 
-  public Reservations(String name, LocalDate reservationDate) {
+  public Reservation(String name, LocalDateTime time) {
     this.name = name;
-    this.reservationDate = reservationDate;
+    this.time = time;
   }
 
 }
